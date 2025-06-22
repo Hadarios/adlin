@@ -1,0 +1,7 @@
+---
+
+supervision_domain: "supervision.21.srs.adlin"
+grafana_port: 3000
+prometheus_port: 9090
+node_exporter_port: 9100
+nginx_exporter_port: 9113

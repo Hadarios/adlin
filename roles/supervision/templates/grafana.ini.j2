@@ -1,0 +1,18 @@
+[server]
+http_addr = 0.0.0.0
+http_port = {{ grafana_port }}
+domain = {{ supervision_domain }}
+root_url = https://{{ supervision_domain }}/
+
+[security]
+admin_user = admin
+admin_password = {{ grafana_admin_password }}
+
+[users]
+allow_sign_up = false
+
+[auth.anonymous]
+enabled = false
+
+[dashboards]
+default_home_dashboard_path = /var/lib/grafana/dashboards/adlin-overview.json

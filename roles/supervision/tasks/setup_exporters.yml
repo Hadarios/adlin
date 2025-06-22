@@ -1,0 +1,24 @@
+---
+
+- name: Start and enable node exporter
+  service:
+    name: prometheus-node-exporter
+    state: started
+    enabled: yes
+  become: true
+
+- name: Start and enable nginx exporter
+  service:
+    name: prometheus-nginx-exporter
+    state: started
+    enabled: yes
+  become: true
+
+- name: Create prometheus user for exporters
+  user:
+    name: prometheus
+    system: yes
+    shell: /bin/false
+    home: /var/lib/prometheus
+    create_home: no
+  become: true

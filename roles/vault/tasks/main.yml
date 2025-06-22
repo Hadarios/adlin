@@ -12,6 +12,6 @@
     auth_method: userpass
     username: "nolan.djellal"
     password: "{{ lookup('env', 'VAULT_PASSWORD') }}"
-    url: "https://vault.srs.epita.fr/"
+    url: "{{ vault_url }}"
   register: vault_login
   changed_when: False

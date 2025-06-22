@@ -1,0 +1,32 @@
+---
+- name: Configure Grafana
+  template:
+    src: grafana.ini.j2
+    dest: /etc/grafana/grafana.ini
+    owner: grafana
+    group: grafana
+    mode: '0640'
+  become: true
+  notify: restart grafana
+
+- name: Start and enable grafana
+  service:
+    name: grafana-server
+    state: started
+    enabled: yes
+  become: true
+
+- name: Wait for Grafana to start
+  wait_for:
+    port: "{{ grafana_port }}"
+
+- name: Add Prometheus datasource
+  community.grafana.grafana_datasource:
+    grafana_url: "https://{{ supervision_domain }}"
+    grafana_user: "admin"
+    grafana_password: "{{ grafana_admin_password }}"
+    name: Prometheus
+    ds_type: prometheus
+    ds_url: "http://localhost:{{ prometheus_port }}"
+    access: proxy
+    is_default: true

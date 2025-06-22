@@ -1,0 +1,15 @@
+---
+
+- name: Import dashboards
+  community.grafana.grafana_dashboard:
+    grafana_url: "https://{{ supervision_domain }}"
+    grafana_user: admin
+    grafana_password: "{{ grafana_admin_password }}"
+    state: present
+    commit_message: Updated by ansible
+    overwrite: true
+    dashboard_url: "{{ item }}"
+  loop:
+    - https://grafana.com/api/dashboards/19268/revisions/1/download
+    - https://grafana.com/api/dashboards/1860/revisions/41/download
+    - https://grafana.com/api/dashboards/12708/revisions/1/download

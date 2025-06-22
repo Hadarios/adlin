@@ -6,6 +6,15 @@
     - name: ansible_password
       prompt: "Password"
   roles:
-    - vault
-    - dns
-    - webserver
+    - role: vault
+      tags:
+        - vault
+    - role: dns
+      tags:
+        - dns
+    - role: webserver
+      tags:
+        - webserver
+    - role: supervision
+      tags:
+        - supervision

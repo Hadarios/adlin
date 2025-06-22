@@ -5,3 +5,6 @@ all:
       ansible_port: 6881
   vars:
     ansible_user: ansible
+    vault_url: "https://vault.srs.epita.fr/"
+    ca_server: "https://acme.srs.adlin:9000/acme/acme/directory"
+    certbot_email: "''"

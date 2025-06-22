@@ -1,0 +1,29 @@
+---
+
+- include_tasks: get_secrets.yml
+
+- include_tasks: packages.yml
+
+- include_tasks: setup_nginx.yml
+
+- name: Flush handlers
+  meta: flush_handlers
+
+- include_tasks: setup_https.yml
+
+- name: Flush handlers
+  meta: flush_handlers
+
+- include_tasks: setup_prometheus.yml
+
+- name: Flush handlers
+  meta: flush_handlers
+
+- include_tasks: setup_grafana.yml
+
+- name: Flush handlers
+  meta: flush_handlers
+
+- include_tasks: setup_exporters.yml
+
+- include_tasks: setup_dashboards.yml

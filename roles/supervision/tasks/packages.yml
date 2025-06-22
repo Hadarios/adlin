@@ -1,0 +1,68 @@
+---
+
+- name: Install dependencies
+  become: true
+  apt:
+    name:
+      - apt-transport-https
+      - gpg
+      - prometheus-nginx-exporter
+    state: present
+
+- name: Add Grafana GPG key
+  become: true
+  apt_key:
+    url: https://packages.grafana.com/gpg.key
+    state: present
+
+- name: Add Grafana APT repository
+  become: true
+  apt_repository:
+    repo: deb https://packages.grafana.com/oss/deb stable main
+    state: present
+
+- name: Install Grafana
+  become: true
+  apt:
+    name: grafana
+    state: present
+
+- name: Install Prometheus
+  become: true
+  apt:
+    name: prometheus
+    state: present
+
+- name: Download Node Exporter
+  become: true
+  get_url:
+    url: https://github.com/prometheus/node_exporter/releases/download/v1.7.0/node_exporter-1.7.0.linux-amd64.tar.gz
+    dest: /tmp/node_exporter.tar.gz
+
+- name: Extract Node Exporter
+  become: true
+  unarchive:
+    src: /tmp/node_exporter.tar.gz
+    dest: /usr/local/bin/
+    remote_src: yes
+
+- name: Move Node Exporter binary
+  become: true
+  command: mv /usr/local/bin/node_exporter-1.7.0.linux-amd64/node_exporter /usr/local/bin/node_exporter
+  args:
+    creates: /usr/local/bin/node_exporter
+
+- name: Create Node Exporter service
+  become: true
+  copy:
+    dest: /etc/systemd/system/node_exporter.service
+    content: |
+      [Unit]
+      Description=Node Exporter
+      After=network.target
+
+      [Service]
+      ExecStart=/usr/local/bin/node_exporter
+
+      [Install]
+      WantedBy=default.target

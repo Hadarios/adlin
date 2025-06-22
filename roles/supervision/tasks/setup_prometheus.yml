@@ -1,0 +1,28 @@
+---
+
+- name: Enable prometheus
+  service:
+    name: prometheus
+    state: started
+    enabled: yes
+  become: true
+
+- name: Create prometheus configuration
+  template:
+    src: prometheus.yml.j2
+    dest: /etc/prometheus/prometheus.yml
+    owner: prometheus
+    group: prometheus
+    mode: '0644'
+  become: true
+  notify: restart prometheus
+
+- name: Configure prometheus web console
+  template:
+    src: web.yml.j2
+    dest: /etc/prometheus/web.yml
+    owner: prometheus
+    group: prometheus
+    mode: '0644'
+  become: true
+  notify: restart prometheus

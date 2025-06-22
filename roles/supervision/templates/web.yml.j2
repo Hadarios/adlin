@@ -1,0 +1,9 @@
+http_server_config:
+  http2: true
+  headers:
+    "X-Frame-Options": "SAMEORIGIN"
+    "X-Content-Type-Options": "nosniff"
+    "X-XSS-Protection": "1; mode=block"
+
+basic_auth_users:
+  admin: "{{ prometheus_admin_password_hash }}"

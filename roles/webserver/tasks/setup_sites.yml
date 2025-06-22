@@ -18,7 +18,7 @@
 - name: Copy conf files (to overwrite them, set overwrite_nginx_conf to true)
   become: true
   template:
-    src: "templates/nginx.conf"
+    src: "templates/nginx.conf.j2"
     dest: "/etc/nginx/sites-available/{{ domain }}.conf"
     force: "{{ overwrite_nginx_conf }}"
   loop: "{{ domains }}"

@@ -1,12 +1,5 @@
 ---
 
-- name: copy root ca
-  become: true
-  copy:
-    src: "files/adlin-rootCA.crt"
-    dest: "/usr/local/share/ca-certificates/adlin/"
-  notify: update ca
-
 - name: Check if HTTPS is already enabled
   ansible.builtin.uri:
     url: "https://{{ item }}"
