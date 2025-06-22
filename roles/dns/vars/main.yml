@@ -1,0 +1,16 @@
+---
+
+domain: "21.srs.adlin"
+host_ip: "10.42.21.2"
+master_ip: "100.64.51.1"
+
+ddns_key_name: "{{ domain }}.key"
+
+zone_domains:
+  - 21.srs.adlin
+  - web1
+  - web2
+  - web3
+  - web4
+  - ilovecats
+  - supervision

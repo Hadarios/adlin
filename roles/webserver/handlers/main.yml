@@ -1,0 +1,9 @@
+- name: restart nginx
+  become: true
+  service:
+    name: nginx
+    state: restarted
+
+- name: update ca
+  become: true
+  command: update-ca-certificates

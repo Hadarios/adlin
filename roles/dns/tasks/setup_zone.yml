@@ -1,0 +1,14 @@
+---
+
+- name: Add all domains to self ip
+  community.general.nsupdate:
+    key_name: "{{ ddns_key_name }}"
+    key_secret: "{{ ddns_key_secret }}"
+    key_algorithm: "hmac-sha256"
+    server: "{{ host_ip }}"
+    zone: "{{ domain }}"
+    record: "{{ item }}"
+    value: "{{ host_ip }}"
+    type: "A"
+  loop: "{{ zone_domains }}"
+

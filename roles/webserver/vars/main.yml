@@ -1,0 +1,10 @@
+---
+
+ca_server: "https://acme.srs.adlin:9000/acme/acme/directory"
+certbot_email: "''"
+domains:
+  - web1.21.srs.adlin
+  - web2.21.srs.adlin
+  - web3.21.srs.adlin
+  - web4.21.srs.adlin
+  - ilovecats.21.srs.adlin

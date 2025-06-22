@@ -1,0 +1,11 @@
+---
+- name: Setup ADLIN Server
+  hosts: adlin
+  remote_user: '{{ ansible_user }}'
+  vars_prompt:
+    - name: ansible_password
+      prompt: "Password"
+  roles:
+    - vault
+    - dns
+    - webserver

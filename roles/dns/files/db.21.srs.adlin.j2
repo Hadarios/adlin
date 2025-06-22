@@ -1,0 +1,11 @@
+; BIND data file for {{ domain }}
+$TTL    {{ ttl }}
+@       IN      SOA     ns.{{ domain }}. admin.{{ domain }}. (
+                     {{ lookup('pipe','date +%Y%m%d') }}01         ; Serial
+                            {{ soa.refresh }}         ; Refresh
+                            {{ soa.retry }}         ; Retry
+                            {{ soa.expire }}         ; Expire
+                         {{ soa.neg_ttl }} )       ; Negative Cache TTL
+;
+@                IN      NS      ns.{{ domain }}.
+ns               IN      A       {{ host_ip }}

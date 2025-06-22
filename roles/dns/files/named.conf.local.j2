@@ -1,0 +1,8 @@
+zone "{{ domain }}" {
+    type primary;
+    file "/var/lib/bind/db.{{ domain }}";
+    allow-update { key "{{ ddns_key_name }}"; };
+    allow-transfer { any; };
+    notify yes;
+    also-notify { {{ master_ip }}; };
+};

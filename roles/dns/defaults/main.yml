@@ -1,0 +1,11 @@
+---
+
+bind_static_dir: "/etc/bind"
+bind_dynamic_dir: "/var/lib/bind"
+
+ttl: 600
+soa:
+  refresh: 600
+  retry: 300
+  expire: 600
+  neg_ttl: 604800

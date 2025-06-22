@@ -1,0 +1,11 @@
+---
+
+- name: Install packages
+  apt:
+    state: present
+    name:
+      - nginx
+      - nginx-extras
+      - certbot
+      - python3-certbot-nginx
+  become: true

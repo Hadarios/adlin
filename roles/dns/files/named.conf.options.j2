@@ -1,0 +1,17 @@
+options {
+        directory "/var/cache/bind";
+
+        forwarders {
+                {{ master_ip }};
+        };
+
+        recursion yes;
+        allow-query { any; };
+
+        dnssec-validation no;
+
+        listen-on { any; };
+        listen-on-v6 { any; };
+
+        allow-transfer { any; };
+};

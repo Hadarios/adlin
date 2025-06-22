@@ -1,0 +1,36 @@
+---
+
+- name: ensure directories exist
+  become: true
+  file:
+    path: "/var/www/html/{{ item }}"
+    state: directory
+  loop: "{{ domains }}"
+
+- name: Copy web pages
+  become: true
+  copy:
+    src: "files/html/{{ item }}.html"
+    dest: "/var/www/html/{{ item }}/index.html"
+  loop: "{{ domains }}"
+  notify: restart nginx
+
+- name: Copy conf files (to overwrite them, set overwrite_nginx_conf to true)
+  become: true
+  template:
+    src: "templates/nginx.conf"
+    dest: "/etc/nginx/sites-available/{{ domain }}.conf"
+    force: "{{ overwrite_nginx_conf }}"
+  loop: "{{ domains }}"
+  loop_control:
+    loop_var: domain
+  notify: restart nginx
+
+- name: ln conf files to enabled
+  become: true
+  file:
+    src: "/etc/nginx/sites-available/{{ item }}.conf"
+    dest: "/etc/nginx/sites-enabled/{{ item }}.conf"
+    state: link
+  loop: "{{ domains }}"
+  notify: restart nginx
